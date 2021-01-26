@@ -1,8 +1,0 @@
-#!/bin/sh
-
-rm -r processor*
-rm parallel_OpenFOAM.*
-rm logS 
-rm -r postProcessing
-rm -r EnSight
-rm -r 0.*
