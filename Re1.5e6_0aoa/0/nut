@@ -1,0 +1,100 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  5.0                                   |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    location    "0";
+    object      nut;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 2 -1 0 0 0 0];
+
+
+internalField uniform 1.5e-5;
+
+boundaryField
+{
+    airfoil_lam
+    {
+        type            zeroGradient;
+    }
+    airfoil
+    {
+/* * * * * * * * * Law of the wall wall model * * * * * * */                  
+         type           LOTWWallModel;
+
+         copyToPatchInternalField 1;
+         sampler     MultiCellSampler;
+         RootFinder
+         {
+             type    Newton;
+             eps     0.0001;
+             maxIter 50;
+         }
+        
+        Law
+        {
+            type   IntegratedReichardt;
+            kappa   0.4;
+            B1      11;
+            B2      3;
+            C       7.8;
+        }
+        
+       value   uniform 0;  //redundant
+       
+       EddyViscosity
+       {
+            type    VanDriest;
+            //type    Duprat;
+            APlus   17.8;
+            kappa   0.39;
+       }
+       
+    }
+    
+    periodic1
+    {
+        type            cyclicAMI;
+    }
+    periodic2
+    {
+        type            cyclicAMI;
+    }
+    
+    farfield
+    {
+        type            fixedValue;
+        value           uniform 0;
+    }
+    inlet
+    {
+        type            fixedValue;
+        value           uniform 0;
+    }
+    outlet
+    {
+        type            zeroGradient;
+    }
+    tr_suction
+    {
+        type            zeroGradient;
+        
+    }
+    tr_blowing
+    {
+        type            zeroGradient;
+    }
+    
+}
+
+
+// ************************************************************************* //

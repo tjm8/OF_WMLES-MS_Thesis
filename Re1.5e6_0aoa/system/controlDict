@@ -1,0 +1,108 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.3.1                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      controlDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+application     pimpleFoam; 
+
+startTime       0; 
+
+ftt             0.00715;         // 1 flow through time = 0.00715
+
+startFrom       startTime;    
+
+stopAt          endTime;
+
+deltaT          1.1e-5;
+
+endTime         #calc "$startTime + 20*$deltaT + 1.5*$ftt";  // xtra 20 time steps - fft start is delayed
+
+//endTime         #calc "$startTime + 3e-5";
+
+writeControl    runTime;
+
+writeInterval   #calc "4*$ftt"; 
+
+purgeWrite      0;
+
+writeFormat     ascii;
+
+timePrecision   9;
+
+runTimeModifiable true;
+
+writePrecision       9;
+
+writeCompression     off;
+
+adjustTimeStep       false;
+
+timeFormat      general;
+
+functions
+{
+	#include "forceCoeffs"
+	#includeFunc probes
+	#includeFunc "forces1"
+	#include "surfAverage"
+	#include "fwhControl"
+	
+	fieldAverage1
+    {
+        type            fieldAverage;
+        libs            ("fieldFunctionObjects");
+        writeControl    writeTime;
+        restartOnRestart    true;
+
+        fields
+        (
+            U
+            {
+                mean        on;
+                prime2Mean  on;
+                base        time;
+            }
+
+            p
+            {
+                mean        on;
+                prime2Mean  on;
+                base        time;
+            }
+            
+            wallShearStress
+            {
+                mean        on;
+                prime2Mean  off;
+                base        time;
+            }
+
+        );
+    }
+    
+
+    
+}
+
+libs (
+    "libOpenFOAM.so"
+    "libWallModelledLES.so"
+     );
+
+
+
+
+
+// ************************************************************************* //

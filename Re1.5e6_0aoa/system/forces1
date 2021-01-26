@@ -1,0 +1,37 @@
+forces1
+{
+    // Mandatory entries
+    type            forces;
+    libs            ("libforces.so");
+    patches         (airfoil_lam airfoil tr_suction tr_blowing);
+
+
+    // Optional entries
+
+    // Field names
+    p               p;
+    U               U;
+    rho             rhoInf;
+    rhoInf          1.181;
+
+    // Reference pressure [Pa]
+    pRef            0;
+
+    // Include porosity effects?
+    porosity        no;
+
+    // Store and write volume field representations of forces and moments
+    writeFields     no;
+
+    // Centre of rotation for moment calculations
+    CofR            (0 0 0);
+
+    // Spatial data binning
+    // - extents given by the bounds of the input geometry
+   /* binData
+    {
+        nBin        20;
+        direction   (1 0 0);
+        cumulative  yes;
+    }*/
+}

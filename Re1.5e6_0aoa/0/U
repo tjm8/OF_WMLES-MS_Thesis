@@ -1,0 +1,79 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.3.1                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volVectorField;
+    object      U;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 1 -1 0 0 0 0];
+
+U_inlet         uniform (56.0 0 0);
+
+internalField   $U_inlet;
+
+boundaryField
+{
+    airfoil_lam
+    {
+        type            fixedValue;
+        value           uniform (0 0 0);
+    }
+    airfoil
+    {
+        type            fixedValue;
+        value           uniform (0 0 0);
+    }
+    periodic1
+    {
+        type		    cyclicAMI;
+    }
+    periodic2
+    {
+        type            cyclicAMI;
+    }
+    farfield
+    {
+        type            fixedValue;
+        value           $U_inlet;
+    }
+
+    inlet
+    {
+        type            fixedValue;
+        value           $U_inlet;
+    }
+
+    outlet
+    {
+        type            zeroGradient;
+    }
+
+    tr_suction
+    {
+        type            surfaceNormalFixedValue;
+        refValue        uniform 1.68;
+    }
+    
+    tr_blowing
+    {
+        type            surfaceNormalFixedValue;
+        refValue        uniform -1.68;
+    }
+
+    
+}
+
+
+
+
+
+// ************************************************************************* //

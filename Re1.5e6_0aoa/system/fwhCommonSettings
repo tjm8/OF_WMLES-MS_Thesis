@@ -1,0 +1,92 @@
+    libs ("libAcoustics.so");
+
+    log                    false;
+
+    writeFft               true;
+
+    probeFrequency         1;
+
+    timeStart              #calc "$startTime + 20*$deltaT";
+    
+    ftt                    0.00715;
+
+    timeEnd                #calc "$startTime + 20*$deltaT + 1.5*$ftt";
+
+    c0                     340.46;
+
+    pName                  p;
+
+    pInf                   101325;
+
+    rho                    rhoInf;
+
+    rhoInf                 1.181;
+
+    CofR                   (0 0 -0.015);
+    
+    dRef                   1;
+
+    observers
+    {
+
+        R-30
+        {
+                position        (1.2660e+00 5.0000e-01 -1.5000e-02);
+                pRef            2.0e-5;
+                fftFreq         2600;
+        }
+
+        R-60
+        {
+                position        (9.0000e-01 8.6603e-01 -1.5000e-02);
+                pRef            2.0e-5;
+                fftFreq         2600;
+        }
+
+        R-90
+        {
+                position        (4.0000e-01 1.0000e+00 -1.5000e-02);
+                pRef            2.0e-5;
+                fftFreq         2600;
+        }
+
+        R-120
+        {
+                position        (-1.0000e-01 8.6603e-01 -1.5000e-02);
+                pRef            2.0e-5;
+                fftFreq         2600;
+        }
+
+        R-150
+        {
+                position        (-4.6603e-01 5.0000e-01 -1.5000e-02);
+                pRef            2.0e-5;
+                fftFreq         2600;
+        }
+        
+        R-90-0
+        {
+                position        (4.0000e-01 1.0000e+00 0.0);
+                pRef            2.0e-5;
+                fftFreq         2600;
+        }
+        
+        R-8c
+        {
+            position        (0.4 3.16 -0.015);
+            pRef            2.0e-5;
+            fftFreq         2600;
+        }
+        
+        R-4c
+        {
+            position        (0.4 1.6 -0.015);
+            pRef            2.0e-5;
+            fftFreq         2600;
+        }
+
+    
+        
+        
+    }
+

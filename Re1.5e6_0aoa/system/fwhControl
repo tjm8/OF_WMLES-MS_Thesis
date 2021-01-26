@@ -1,0 +1,56 @@
+Dipole1AFassarat
+{
+    type                       FfowcsWilliamsHawkings;
+    #include                   "fwhCommonSettings";
+    patches                    ("airfoil");
+    interpolationScheme        cell;
+
+    surfaces
+    (
+        airfoil
+        {
+            type               patch;
+            patches            ("airfoil");
+            interpolate        false;
+        }
+    );
+
+    nonUniformSurfaceMotion    false;
+    U0                         (56.0 0.0 0.0);
+    Ufwh                       (0.0 0.0 0.0);
+
+    cleanFreq                  100;
+    formulationType            Farassat1AFormulation;
+    fixedResponseDelay         true;
+    responseDelay              7.15e-6;
+}
+
+/*Dipole1BFassarat
+{
+    type                       FfowcsWilliamsHawkings;
+    #include                   "fwhCommonSettingsB";
+    patches                    ("airfoil");
+    interpolationScheme        cell;
+
+    surfaces
+    (
+        airfoil
+        {
+            type               patch;
+            patches            ("airfoil");
+            interpolate        false;
+        }
+    );
+
+    nonUniformSurfaceMotion    false;
+    U0                         (0.0 0.0 0.0);
+    Ufwh                       (0.0 0.0 0.0);
+
+    cleanFreq                  100;
+    formulationType            Farassat1AFormulation;
+    fixedResponseDelay         true;
+    responseDelay              7.15e-6;
+}
+*/
+
+

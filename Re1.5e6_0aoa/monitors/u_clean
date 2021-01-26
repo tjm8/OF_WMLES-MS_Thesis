@@ -1,0 +1,22 @@
+#!/bin/sh
+
+#rm -r force_mon
+#mkdir force_mon
+
+time=0.0258
+
+cat ../postProcessing/probes/$time/U | awk 'NR>94 { gsub(/[(]/,"");gsub(/[)]/,""); print}' > u_clean$time.dat
+
+time=0.129
+
+cat ../postProcessing/probes/$time/U | awk 'NR>94 { gsub(/[(]/,"");gsub(/[)]/,""); print}' > u_clean$time.dat
+
+
+
+#cat ../postProcessing/forces1/$time/force.dat | awk 'NR>4 { gsub(/[(]/,""); print $8}' > force_mon/Fvx
+#cat ../postProcessing/forces1/$time/force.dat | awk 'NR>4 { gsub(/[(]/,""); print $2}' > force_mon/Fp_tot
+
+
+
+
+

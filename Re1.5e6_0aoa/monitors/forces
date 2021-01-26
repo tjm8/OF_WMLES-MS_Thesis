@@ -1,0 +1,29 @@
+#!/bin/sh
+
+t="0"
+t="0.0072"
+t="0.0144"
+t="0.0216"
+t="0.028805"
+t="0.05042"
+t="0.057625"
+t="0.086225"
+
+rm -r force_mon$t
+mkdir force_mon$t
+
+
+cat ../postProcessing/forces1/$t/force.dat | awk 'NR>4 { gsub(/[(]/,""); print $1}' > force_mon$t/t
+cat ../postProcessing/forces1/$t/force.dat | awk 'NR>4 { gsub(/[(]/,""); print $5}' > force_mon$t/Fpx
+cat ../postProcessing/forces1/$t/force.dat | awk 'NR>4 { gsub(/[(]/,""); print $8}' > force_mon$t/Fvx
+cat ../postProcessing/forces1/$t/force.dat | awk 'NR>4 { gsub(/[(]/,""); print $3}' > force_mon$t/Fy_tot
+cat ../postProcessing/forces1/$t/force.dat | awk 'NR>4 { gsub(/[(]/,""); print $2}' > force_mon$t/Fx_tot
+
+#cat ../postProcessing/forces1/$t/force_$t.dat | awk 'NR>4 { gsub(/[(]/,""); print $1}' > force_mon$t/t
+#cat ../postProcessing/forces1/$t/force_$t.dat | awk 'NR>4 { gsub(/[(]/,""); print $5}' > force_mon$t/Fpx
+#cat ../postProcessing/forces1/$t/force_$t.dat | awk 'NR>4 { gsub(/[(]/,""); print $8}' > force_mon$t/Fvx
+#cat ../postProcessing/forces1/$t/force_$t.dat | awk 'NR>4 { gsub(/[(]/,""); print $3}' > force_mon$t/Fy_tot
+#cat ../postProcessing/forces1/$t/force_$t.dat | awk 'NR>4 { gsub(/[(]/,""); print $2}' > force_mon$t/Fx_tot
+
+
+

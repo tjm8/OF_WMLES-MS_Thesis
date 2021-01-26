@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# logres | grep 'Solving for p' | cut -d' ' -f9 | tr -d ',' > residual
+
+# logres | grep 'Solving for Uy' | cut -d' ' -f9 | tr -d ',' 
+
+rm -r res
+mkdir res
+
+cat ../logS | awk '/Solving for Ux/ { gsub(","," "); print $8 }' > res/uxres
+cat ../logS | awk '/Solving for Uy/ { gsub(","," "); print $8 }' > res/uyres
+cat ../logS | awk '/Solving for Uz/ { gsub(","," "); print $8 }' > res/uzres
+cat ../logS | awk '/Solving for p/ { gsub(","," "); print $8 }' > res/pres
+cat ../logS | awk '/Solving for k/ { gsub(","," "); print $8 }' > res/kres

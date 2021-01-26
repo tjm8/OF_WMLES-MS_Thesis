@@ -1,0 +1,84 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v1906                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       polyBoundaryMesh;
+    location    "constant/polyMesh";
+    object      boundary;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+9
+(
+    airfoil_lam
+    {
+        type            wall;
+        inGroups        1(wall);
+        nFaces          6490;
+        startFace       127186698;
+    }
+    airfoil
+    {
+        type            wall;
+        inGroups        1(wall);
+        nFaces          234702;
+        startFace       127193188;
+    }
+    tr_suction
+    {
+        type            patch;
+        nFaces          6844;
+        startFace       127427890;
+    }
+    tr_blowing
+    {
+        type            patch;
+        nFaces          6372;
+        startFace       127434734;
+    }
+    periodic1
+    {
+        type            cyclicAMI;
+        neighbourPatch  periodic2;
+        nFaces          360918;
+        startFace       127441106;
+        transform       translational;
+        separationVector (0 0 -.03);
+    }
+    periodic2
+    {
+        type            cyclicAMI;
+        neighbourPatch  periodic1;
+        nFaces          360918;
+        startFace       127802024;
+        transform       translational;
+        separationVector (0 0 .03);
+    }
+    inlet
+    {
+        type            patch;
+        nFaces          5900;
+        startFace       128162942;
+    }
+    farfield
+    {
+        type            patch;
+        nFaces          7788;
+        startFace       128168842;
+    }
+    outlet
+    {
+        type            patch;
+        nFaces          7080;
+        startFace       128176630;
+    }
+)
+
+// ************************************************************************* //
